@@ -1,0 +1,21 @@
+{% extends "login_form.html" %}
+
+{% block head %}
+	
+{% endblock head %}
+
+{% block content %}
+	<div class="rigister_form">
+			<h1>Регистрация</h1>
+			<form method="POST" >
+			{% csrf_token %}
+				{% for field in register_form.fields %}
+					{{field}}
+				{% endfor %}
+				<h2>Дополнительные телефоны</h2>
+				{% for field in phones_formset.fields %}
+					{{field}}
+				{% endfor %}
+			</form>
+		</div>
+{% endblock content %}

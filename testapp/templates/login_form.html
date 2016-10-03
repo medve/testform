@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Test Site</title>
+	<meta encoding="utf-8">
+	{% block head %}
+		
+	{% endblock head %}
+</head>
+<body>
+<div class="container">
+	<div class="content">
+	{% block content %}
+		<div class="login_form">
+			<h1>Вход на сайт</h1>
+			<form method="POST" >
+			{% csrf_token %}
+				{% for field in form.fields %}
+					{{field}}
+				{% endfor %}
+				<input type="submit" value="Отправить">
+			</form>
+		</div>
+	{% endblock content %}
+	</div>
+</div>
+</body>
+</html>
