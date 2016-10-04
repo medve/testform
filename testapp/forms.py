@@ -28,6 +28,10 @@ class MultiphoneAuthForm(auth_f.AuthentificationForm):
     login_is_phone = False
 
     def clean_username(self,value):
+        '''
+        выясняем является ли имя пользователя телефоном или мылом
+        если ни тем ни другим, то ошибка
+        '''
         if clean_phone(value):
             self.login_is_phone = True
             return value
@@ -44,12 +48,15 @@ class MultiphoneAuthForm(auth_f.AuthentificationForm):
         password = self.cleaned_data.get('password')
 
         if username and password:
+            #выясняем является логин телефоном или мылом
+            #и аутентифицируем соответствующим образом
             if login_is_phone(username):
                 self.user_cache = authenticate_by_phone(phone=username,
                                            password=password)
             else:
                 self.user_cache = authenticate(email=username,
                                            password=password)
+            #Если аутентификация не выполнена, то ошибка валидации
             if self.user_cache is None:
                 raise forms.ValidationError(
                     self.error_messages['invalid_login'],

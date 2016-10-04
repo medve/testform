@@ -7,6 +7,10 @@ from django.contrib.auth.tokens import default_token_generator
 from django.utils.http import urlsafe_base64_encode
 
 
+'''
+Содержит функции для подтверждения email или телефона
+'''
+
 def send_confirm_email(user,phone, token_generator = default_token_generator,
                             from_email, use_https = False,
                             subject_template_name='subject_template.txt',

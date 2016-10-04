@@ -38,6 +38,7 @@ class AdditionalPhone(models.Model):
     approved = models.BooleanField(default=False,verbose_name='Подтвержден')
 
     def set_active(self,*args,*kwargs):
+        #проверяем является ли телефон активным и активируем
         if self.objects.filter(
                  phone = self.phone, 
                  active= True).exists():
